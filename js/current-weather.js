@@ -1,4 +1,4 @@
-import weather from '../data/current-weather.js';
+/* import weather from '../data/current-weather.js'; */
 import { formatDate, formatTemp, } from './utils/format-data.js';
 import { weatherConditionsCode, } from './utils/constants.js';
 import { getLatLon, } from './geolocation.js';
@@ -19,6 +19,7 @@ function setCurrentTemp($container, temp){
 }
 
 function solarStatus(sunsetTime, sunriseTime){
+    
     const currentHours = new Date().getHours();
     const sunsetHours = sunsetTime.getHours();
     const sunriseHours = sunriseTime.getHours();
@@ -56,10 +57,11 @@ function configCurrentWeather(weather) {
     const $currentWeatherTemp = document.querySelector("#current-weather-temp");
     const temp = weather.main.temp;
     setCurrentTemp($currentWeatherTemp,temp);
-    //background
-    const sunriseTime = new Date(weather.sys.sunrise * 100);
-    const sunsetTime = new Date(weather.sys.sunset * 100);
+    //background 
+    const sunriseTime = new Date(weather.sys.sunrise * 1000);
+    const sunsetTime = new Date(weather.sys.sunset * 1000);
     const coditionCode = String(weather.weather[0].id).charAt(0);
+    
     const sunStatus = solarStatus(sunsetTime, sunriseTime)
     setBackground($app, coditionCode, sunStatus);
 }
